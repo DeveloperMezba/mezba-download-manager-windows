@@ -10,7 +10,7 @@ perfectly.
 
 3. after installing it open the app and setup the browser extension to work perfectly.
 
-## Add the browser extension once
+## Add the browser extension:
 
 ### Chrome, Edge, Brave, Chromium, Vivaldi
 
