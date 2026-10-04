@@ -1,3 +1,14 @@
+### Mezba Download Manger
+
+It is basically an early released version.so It have some bugs. But follow the steps and it will work with your windows version 
+perfectly. 
+
+# Installation:
+1.download the .exe file and install it.
+2. It will need internet connection to be installed.
+3. after installing it open the app and setup the browser extension to work perfectly.
+
+
 # Mezba Download Manager for Windows 0.1.2
 
 Windows edition of MDM, based on Linux 0.3.1. Includes MP4/MKV video, audio, playlist downloads, a browser companion, compact progress windows, resumable direct files, a download queue, public Google Drive files, and manual GitHub update checks.
