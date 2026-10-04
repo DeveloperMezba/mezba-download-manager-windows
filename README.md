@@ -1,53 +1,12 @@
-### Mezba Download Manger
+# Mezba Download Manger
 
 It is basically an early released version.so It have some bugs. But follow the steps and it will work with your windows version 
 perfectly. 
 
-# Installation:
-1.download the .exe file and install it.
+## Installation:
+1.download the .exe file and install it.( windows will show a warning and will ask you to don't run it. just click on more info and install it anyways.)
 2. It will need internet connection to be installed.
 3. after installing it open the app and setup the browser extension to work perfectly.
-
-
-# Mezba Download Manager for Windows 0.1.2
-
-Windows edition of MDM, based on Linux 0.3.1. Includes MP4/MKV video, audio, playlist downloads, a browser companion, compact progress windows, resumable direct files, a download queue, public Google Drive files, and manual GitHub update checks.
-
-## Windows 0.1.2: completion fix and separate tool updates
-
-This release intentionally corrects the version sequence to **0.1.2**, replacing the earlier build labelled 1.1.0. It fixes a Windows MP4 finalization error: the converter opened its finished temporary file read-only before calling `os.fsync`, which Windows can reject with `[Errno 9] Bad file descriptor`. The final flush now uses a writable handle before publishing the output. Real conversion and disk failures still remain errors, and the source file is preserved.
-
-The familiar layout remains, with subtle card borders, a selected sidebar state, slimmer progress bars and clearer status colors. The new **Update** button opens two options: **App update** and **Download tools**.
-
-1. Pause downloads, close MDM and its progress windows, and exit Chrome/Brave.
-2. Run `Mezba-Download-Manager-0.1.2-Windows-x64-Setup.exe` under the same Windows account. Install over your current copy; keep your downloads and State folder.
-3. Reopen MDM. In your browser's Extensions page, reload MDM and confirm version **0.1.2**, then refresh video pages. If your browser will not reload the lower version number, remove only the extension and Load unpacked again from the installed folder below.
-4. For an old task still marked Error, click **Retry** using its existing folder and format. The engine reuses retained downloads where possible and performs finalization again. Existing error records are not silently reclassified as complete.
-
-The screenshot error and a matching code defect were identified. The supplied installer is built on Linux; actual Windows Chrome/Brave end-to-end verification still needs your PC. See `docs/TEST-REPORT.md` for the precise checks performed.
-
-## Start here
-
-1. Open `Mezba-Download-Manager-0.1.2-Windows-x64-Setup.exe` on **64-bit Windows 10 or Windows 11**.
-2. Setup starts automatically and installs for your current Windows account. **Internet access is needed** for the first installation. Leave setup open while it downloads and verifies the media tools.
-3. Click Finish to open MDM. A Start menu shortcut and desktop shortcut are created.
-4. Open **Browser setup** in MDM and follow the extension instructions below.
-
-You do **not** need to install Python, pip, GTK, Java, .NET, FFmpeg, or Deno manually. The installer includes a private Python/Tk runtime and Python media packages. It downloads pinned, SHA-256-verified FFmpeg/ffprobe and Deno packages from their upstream GitHub releases. These stay inside MDM's folder and do not change your system PATH or an existing Python installation.
-
-Allow roughly **1 GB of free disk space during setup**, plus space for your downloads. The first media-tool download is approximately **150 MiB**. The compact installer is not a fully offline installer. Later app updates reuse downloaded tools when their versions match.
-
-This build is unsigned. Windows may show an unknown-publisher/SmartScreen prompt. Check the filename, source, and SHA256SUMS before deciding whether to run it. An unsigned binary is not a security certification. Do not disable antivirus or Windows protection to install it; if Windows blocks it, keep the warning/error and report it.
-
-## What is included in the complete project
-
-- `installer/`: the actual compiled Windows setup `.exe` and `SHA256SUMS`.
-- `source/`: all MDM Python code, browser extension code, tests, setup code, and dependency configuration.
-- `build/`: native Windows launcher C source, icon/resource source, NSIS installer source, pinned dependency hashes, and the build script.
-- `docs/`: usage, building/publishing, and the verification report.
-- `README.md`, `VERSION`, `LICENSE`, and `.github/workflows/`: project instructions and Windows CI/release workflow.
-
-You can install directly from the supplied `.exe`. Building the source is optional. All MDM application/installer/launcher source is included. Third-party runtimes and libraries remain separate upstream projects; their licenses are retained in the private runtime, and their source/download references are listed in `docs/THIRD-PARTY.md` and the build lock files.
 
 ## Add the browser extension once
 
@@ -60,7 +19,6 @@ You can install directly from the supplied `.exe`. Building the source is option
 ```text
 %LOCALAPPDATA%\Programs\Mezba Download Manager\app\extension\chromium
 ```
-
 Paste this path into the Windows file picker or browse to the folder opened by MDM. The installer already registers the matching native-messaging host for your account. Do not change the Chromium manifest key.
 
 4. Pin the extension and reload open video pages. Click **↓ MDM** beside a visible video, or use the toolbar button.
@@ -75,6 +33,28 @@ Open `about:debugging` → This Firefox → Load Temporary Add-on. Choose:
 ```
 
 This is an unsigned preview, so Firefox removes the temporary add-on after restarting. Permanent normal Firefox distribution requires Mozilla signing. The installer cannot silently add extensions to your browser.
+
+### Mezba Download Manager for Windows 0.1.2
+
+Windows edition of MDM, based on Linux 0.3.1. Includes MP4/MKV video, audio, playlist downloads, a browser companion, compact progress windows, resumable direct files, a download queue, public Google Drive files, and manual GitHub update checks.
+
+#### Windows 0.1.2: completion fix and separate tool updates
+
+This release intentionally corrects the version sequence to **0.1.2**, replacing the earlier build labelled 1.1.0. It fixes a Windows MP4 finalization error: the converter opened its finished temporary file read-only before calling `os.fsync`, which Windows can reject with `[Errno 9] Bad file descriptor`. The final flush now uses a writable handle before publishing the output. Real conversion and disk failures still remain errors, and the source file is preserved.
+
+The familiar layout remains, with subtle card borders, a selected sidebar state, slimmer progress bars and clearer status colors. The new **Update** button opens two options: **App update** and **Download tools**.
+
+1. Pause downloads, close MDM and its progress windows, and exit Chrome/Brave.
+2. Run `Mezba-Download-Manager-0.1.2-Windows-x64-Setup.exe` under the same Windows account. Install over your current copy; keep your downloads and State folder.
+3. Reopen MDM. In your browser's Extensions page, reload MDM and confirm version **0.1.2**, then refresh video pages. If your browser will not reload the lower version number, remove only the extension and Load unpacked again from the installed folder below.
+4. For an old task still marked Error, click **Retry** using its existing folder and format. The engine reuses retained downloads where possible and performs finalization again. Existing error records are not silently reclassified as complete.
+
+The screenshot error and a matching code defect were identified. The supplied installer is built on Linux; actual Windows Chrome/Brave end-to-end verification still needs your PC. See `docs/TEST-REPORT.md` for the precise checks performed.
+
+
+
+
+
 
 ## Download options
 
