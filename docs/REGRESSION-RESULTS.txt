@@ -1,0 +1,67 @@
+test_changed_file_refused (test_downloads.Downloads.test_changed_file_refused) ... ok
+test_checksum_failure_keeps_partial (test_downloads.Downloads.test_checksum_failure_keeps_partial) ... ok
+test_completed_journal_recovers_before_rename (test_downloads.Downloads.test_completed_journal_recovers_before_rename) ... ok
+test_daemon_crash_recovery_and_native_framing (test_downloads.Downloads.test_daemon_crash_recovery_and_native_framing) ... ok
+test_disconnect_retries_and_resumes (test_downloads.Downloads.test_disconnect_retries_and_resumes) ... ok
+test_empty_file (test_downloads.Downloads.test_empty_file) ... ok
+test_format_choices (test_downloads.Downloads.test_format_choices) ... ok
+test_input_restrictions (test_downloads.Downloads.test_input_restrictions) ... ok
+test_large_offset_no_32bit_truncation (test_downloads.Downloads.test_large_offset_no_32bit_truncation) ... ok
+test_manager_crash_recovery_without_socket (test_downloads.Downloads.test_manager_crash_recovery_without_socket) ... ok
+test_missing_validator_resume_refused (test_downloads.Downloads.test_missing_validator_resume_refused) ... ok
+test_native_framing_rejects_privileged_action (test_downloads.Downloads.test_native_framing_rejects_privileged_action) ... ok
+test_no_overwrite (test_downloads.Downloads.test_no_overwrite) ... ok
+test_nonrange_download (test_downloads.Downloads.test_nonrange_download) ... ok
+test_nonrange_resume_refused (test_downloads.Downloads.test_nonrange_resume_refused) ... ok
+test_pause_resume (test_downloads.Downloads.test_pause_resume) ... ok
+test_refreshed_url_same_identity (test_downloads.Downloads.test_refreshed_url_same_identity) ... ok
+test_segmented_hash (test_downloads.Downloads.test_segmented_hash) ... ok
+test_truncated_partial_refused (test_downloads.Downloads.test_truncated_partial_refused) ... ok
+test_wrong_range_rejected (test_downloads.Downloads.test_wrong_range_rejected) ... ok
+test_inspect_download_and_audio_conversion (test_media.RealMedia.test_inspect_download_and_audio_conversion) ... ok
+test_playlist_modes_archive_and_partial_failure (test_media.RealMedia.test_playlist_modes_archive_and_partial_failure) ... ok
+test_compatible_mp4_unchanged_and_mkv_remuxed (test_mp4.MP4.test_compatible_mp4_unchanged_and_mkv_remuxed) ... ok
+test_existing_mp4_is_not_overwritten (test_mp4.MP4.test_existing_mp4_is_not_overwritten) ... ok
+test_failed_conversion_keeps_input_and_removes_temporary_output (test_mp4.MP4.test_failed_conversion_keeps_input_and_removes_temporary_output) ... ok
+test_final_flush_uses_writable_handle_and_preserves_real_io_errors (test_mp4.MP4.test_final_flush_uses_writable_handle_and_preserves_real_io_errors)
+Model Windows _commit access rules even when this suite runs on Linux. ... ok
+test_webm_converted_to_h264_aac (test_mp4.MP4.test_webm_converted_to_h264_aac) ... ok
+test_current_item_and_full_playlist_choices (test_playlists.Playlists.test_current_item_and_full_playlist_choices) ... ok
+test_failed_playlist_probe_keeps_single_video (test_playlists.Playlists.test_failed_playlist_probe_keeps_single_video) ... ok
+test_full_playlist_command_archive_order_and_audio (test_playlists.Playlists.test_full_playlist_command_archive_order_and_audio) ... ok
+test_invalid_modes_rejected (test_playlists.Playlists.test_invalid_modes_rejected) ... ok
+test_mp4_command_keeps_single_or_playlist_scope (test_playlists.Playlists.test_mp4_command_keeps_single_or_playlist_scope) ... ok
+test_pure_playlist_labels_first_item_and_resolves_url (test_playlists.Playlists.test_pure_playlist_labels_first_item_and_resolves_url) ... ok
+test_single_command_cannot_download_whole_playlist (test_playlists.Playlists.test_single_command_cannot_download_whole_playlist) ... ok
+test_single_video_has_no_playlist_modes (test_playlists.Playlists.test_single_video_has_no_playlist_modes) ... ok
+test_unavailable_preview_keeps_confirmed_playlist (test_playlists.Playlists.test_unavailable_preview_keeps_confirmed_playlist) ... ok
+test_unknown_count_is_not_sample_length (test_playlists.Playlists.test_unknown_count_is_not_sample_length) ... ok
+test_activation_failure_restores_queue (test_tool_updates.ToolUpdates.test_activation_failure_restores_queue) ... ok
+test_archive_ignores_paths_and_requires_complete_windows_tools (test_tool_updates.ToolUpdates.test_archive_ignores_paths_and_requires_complete_windows_tools) ... ok
+test_atomic_activation_retains_previous_bundle (test_tool_updates.ToolUpdates.test_atomic_activation_retains_previous_bundle) ... ok
+test_bundle_pointer_rejects_traversal (test_tool_updates.ToolUpdates.test_bundle_pointer_rejects_traversal) ... ok
+test_download_requires_exact_hash_and_size (test_tool_updates.ToolUpdates.test_download_requires_exact_hash_and_size) ... ok
+test_external_hosts_and_insecure_redirects_rejected (test_tool_updates.ToolUpdates.test_external_hosts_and_insecure_redirects_rejected) ... ok
+test_failed_staging_leaves_queue_and_active_tools_untouched (test_tool_updates.ToolUpdates.test_failed_staging_leaves_queue_and_active_tools_untouched) ... ok
+test_github_release_requires_digest_and_matching_repository (test_tool_updates.ToolUpdates.test_github_release_requires_digest_and_matching_repository) ... ok
+test_switch_resumes_only_previously_running_queue (test_tool_updates.ToolUpdates.test_switch_resumes_only_previously_running_queue) ... ok
+test_up_to_date_does_not_pause_downloads (test_tool_updates.ToolUpdates.test_up_to_date_does_not_pause_downloads) ... ok
+test_locked_seek_write_for_windows_offsets (test_windows_port.WindowsPort.test_locked_seek_write_for_windows_offsets) ... ok
+test_reserved_windows_filenames (test_windows_port.WindowsPort.test_reserved_windows_filenames) ... ok
+test_service_rejects_wrong_token (test_windows_port.WindowsPort.test_service_rejects_wrong_token) ... ok
+test_update_installer_checksum_and_repository (test_windows_port.WindowsPort.test_update_installer_checksum_and_repository) ... ok
+test_update_repository_and_versions (test_windows_port.WindowsPort.test_update_repository_and_versions) ... ok
+test_engine_failure_is_preserved (test_worker_completion.WindowsWorkerIntegration.test_engine_failure_is_preserved) ... skipped 'Requires actual Windows Job Objects'
+test_service_death_stops_engine_and_descendant (test_worker_completion.WindowsWorkerIntegration.test_service_death_stops_engine_and_descendant) ... skipped 'Requires actual Windows Job Objects'
+test_success_unicode_output_and_spaces (test_worker_completion.WindowsWorkerIntegration.test_success_unicode_output_and_spaces) ... skipped 'Requires actual Windows Job Objects'
+test_assignment_failure_never_runs_engine_and_closes_every_handle (test_worker_completion.WorkerRegressions.test_assignment_failure_never_runs_engine_and_closes_every_handle) ... ok
+test_background_launch_requests_permitted_job_breakaway (test_worker_completion.WorkerRegressions.test_background_launch_requests_permitted_job_breakaway) ... ok
+test_disallowed_breakaway_retries_normal_launch_only (test_worker_completion.WorkerRegressions.test_disallowed_breakaway_retries_normal_launch_only) ... ok
+test_error_guidance_keeps_original_evidence (test_worker_completion.WorkerRegressions.test_error_guidance_keeps_original_evidence) ... ok
+test_owner_death_is_failure_and_cleans_job (test_worker_completion.WorkerRegressions.test_owner_death_is_failure_and_cleans_job) ... ok
+test_success_and_real_failure_codes_survive_cleanup (test_worker_completion.WorkerRegressions.test_success_and_real_failure_codes_survive_cleanup) ... ok
+
+----------------------------------------------------------------------
+Ran 61 tests in 73.256s
+
+OK (skipped=3)

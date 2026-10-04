@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Mezba Download Manager",
+  "version": "0.1.2",
+  "description": "Video quality and audio selection, file downloads, and a lightweight Linux download queue.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtczzO0ZI/AaI7FJeB6jUrJsGz8gf1MXWEmdpcM3lyNmIDOsDXDxxXihTT1SpK/1Yli71xLySLQDtWXy9Sw8YQLjdlbb/jcecKmqctPpjGtA9ly90BoV6UBYs3BYzXi3EhQdOjNnusTrpDhSZHJHbfAKMgRuM7ZxqiKBDsvDPHeA0h1WPKx7q6DQTu1dgeXAjGjjnnsfzvgNcf15YpoeEjlk8DysogrSLXG6xIIkMpF/xFj5l//HFiZsUwWg7g7+B4KIh/VdaEV83tlfELiaR4im/Z1XcwO2g97z8JKJzPxQuMMFhCh+hYZ7GvLDD45bq4vfCRT8fP+A5EElRmKRyQQIDAQAB",
+  "permissions": [
+    "nativeMessaging",
+    "activeTab",
+    "contextMenus",
+    "tabs",
+    "webRequest"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Mezba Download Manager"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "choices.js",
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+*{box-sizing:border-box}body{background:#10151f;color:#eaf0fb;font:13px/1.5 system-ui,sans-serif;margin:0;padding:22px;min-width:250px}header{display:flex;gap:12px;align-items:center}header b{font-size:25px;color:#70e0c2}header span{font-size:10px;color:#8fa4bf;letter-spacing:1px}h1{font-size:17px;line-height:1.4;overflow-wrap:anywhere;max-height:72px;overflow:auto}#state{color:#70e0c2;font-weight:600;margin:12px 0 9px}progress{display:block;width:100%;height:12px;accent-color:#70e0c2}progress::-webkit-progress-bar{background:#233147;border-radius:10px}progress::-webkit-progress-value{background:#70e0c2;border-radius:10px}#details,footer{color:#92a3bc}#error{color:#ffb6ae;white-space:pre-wrap;overflow-wrap:anywhere;max-height:90px;overflow:auto}.buttons{display:flex;flex-wrap:wrap;gap:8px}button{cursor:pointer;background:#233147;border:1px solid #34455f;color:#eaf0fb;border-radius:8px;padding:9px 12px;font:inherit}button:hover{background:#30445f}button:disabled{opacity:.5;cursor:default}footer{font-size:11px;margin-top:18px}[hidden]{display:none!important}
+
+/* Small status polish; retain the existing layout. */
+body[data-status="error"] #state{color:#ffb6ae}
+body[data-status="complete"] #state{color:#70e0c2}
+body[data-status="complete"] #folder{background:#70e0c2;color:#10151f;border-color:#70e0c2}
+progress{height:8px;border:0;border-radius:10px;overflow:hidden}
+button:focus-visible{outline:2px solid #70e0c2;outline-offset:3px}

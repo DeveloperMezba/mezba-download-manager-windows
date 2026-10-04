@@ -1,0 +1,146 @@
+[
+  {
+    "name": "brotli-1.2.0-cp313-cp313-win_amd64.whl",
+    "url": "https://files.pythonhosted.org/packages/ff/91/e739587be970a113b37b821eae8097aac5a48e5f0eca438c22e4c7dd8648/brotli-1.2.0-cp313-cp313-win_amd64.whl",
+    "sha256": "b63daa43d82f0cdabf98dee215b375b4058cce72871fd07934f179885aad16e8",
+    "project": "brotli",
+    "version": "1.2.0",
+    "license": "MIT"
+  },
+  {
+    "name": "idna-3.20-py3-none-any.whl",
+    "url": "https://files.pythonhosted.org/packages/58/a2/bb081bab032533a855d44de1d56f8e8426114ff1ba5d1f07a438a0a654f8/idna-3.20-py3-none-any.whl",
+    "sha256": "ab7ae7122974553370f0bdb919e1a960b2cd1bc1ef0276416d896db81c14582c",
+    "project": "idna",
+    "version": "3.20",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "name": "mutagen-1.48.1-py3-none-any.whl",
+    "url": "https://files.pythonhosted.org/packages/47/d8/a29e4e3991765e7ce4ed1f7e4074fe1ba9da03e0048639734de60f9cadb9/mutagen-1.48.1-py3-none-any.whl",
+    "sha256": "4f077fe87d3fc7fba259aa63d8c026b18382ca6a42ef37c61e16f1b1b5b82fe7",
+    "project": "mutagen",
+    "version": "1.48.1",
+    "license": "GPL-2.0-or-later"
+  },
+  {
+    "name": "tqdm-4.70.1-py3-none-any.whl",
+    "url": "https://files.pythonhosted.org/packages/a7/03/921a3d3c75785aca9ebfbfcabfbc3a1be12e2ab5265deb026d55a5a3f83e/tqdm-4.70.1-py3-none-any.whl",
+    "sha256": "c293e525e6fef9c20e8728fd4612df02a0aa31bb5fe91ecd93e123b1b7bffa73",
+    "project": "tqdm",
+    "version": "4.70.1",
+    "license": "MPL-2.0 AND MIT"
+  },
+  {
+    "name": "charset_normalizer-3.5.1-cp313-cp313-win_amd64.whl",
+    "url": "https://files.pythonhosted.org/packages/8a/33/56d97ade41c8db611e727168c52ae46c9224c362ec28d4b65d7e9869e8da/charset_normalizer-3.5.1-cp313-cp313-win_amd64.whl",
+    "sha256": "aea996a6aba25260827c9ea511d1addfde2da9eb686ac961838509086188b7e6",
+    "project": "charset-normalizer",
+    "version": "3.5.1",
+    "license": "MIT"
+  },
+  {
+    "name": "filelock-4.0.4-py3-none-any.whl",
+    "url": "https://files.pythonhosted.org/packages/bc/ac/8b9c6dc2aa7e9cf5582e20a337006c3428c3d752c2255dbaca2c78a8be45/filelock-4.0.4-py3-none-any.whl",
+    "sha256": "0df72be195ca7892216d16f2edce8d9b93a571f02402972020a8cff84c594c7b",
+    "project": "filelock",
+    "version": "4.0.4",
+    "license": "MIT"
+  },
+  {
+    "name": "yt_dlp_ejs-0.8.0-py3-none-any.whl",
+    "url": "https://files.pythonhosted.org/packages/e3/bd/520769863744b669440a924271a6159ddd82ad5ae26b4ac4d4b69e9f8d44/yt_dlp_ejs-0.8.0-py3-none-any.whl",
+    "sha256": "79300e5fca7f937a1eeede11f0456862c1b41107ce1d726871e0207424f4bdb4",
+    "project": "yt-dlp-ejs",
+    "version": "0.8.0",
+    "license": "Unlicense AND MIT AND ISC"
+  },
+  {
+    "name": "yt_dlp-2026.8.19-py3-none-any.whl",
+    "url": "https://files.pythonhosted.org/packages/69/b2/8cd1613f56eed7ceb64fbd4df3f1c01246bfb098e6f398228bafda22b80b/yt_dlp-2026.8.19-py3-none-any.whl",
+    "sha256": "1d57897e94c6665a0a6f9bc54b34e584284e32c034ffab3a7df25d8f7b24eedf",
+    "project": "yt-dlp",
+    "version": "2026.8.19",
+    "license": "Unlicense"
+  },
+  {
+    "name": "requests-2.34.2-py3-none-any.whl",
+    "url": "https://files.pythonhosted.org/packages/a0/f4/c67b0b3f1b9245e8d266f0f112c500d50e5b4e83cb6f3b71b6528104182a/requests-2.34.2-py3-none-any.whl",
+    "sha256": "2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0",
+    "project": "requests",
+    "version": "2.34.2",
+    "license": "Apache-2.0"
+  },
+  {
+    "name": "beautifulsoup4-4.15.0-py3-none-any.whl",
+    "url": "https://files.pythonhosted.org/packages/88/c6/92fcd42f1ba33e1184263f25bfabf3d27c383410470f169e4b8163bf9c17/beautifulsoup4-4.15.0-py3-none-any.whl",
+    "sha256": "d6f88de62e1d4e38ecb1077eb9724cd0eff29d2a08ca16a401e9b9e93f117cf9",
+    "project": "beautifulsoup4",
+    "version": "4.15.0",
+    "license": "MIT License"
+  },
+  {
+    "name": "certifi-2026.7.22-py3-none-any.whl",
+    "url": "https://files.pythonhosted.org/packages/0b/a7/71ac2cff56fec219ed242bb11b8efb69fcc4bec75db06fb7bfe35de520e6/certifi-2026.7.22-py3-none-any.whl",
+    "sha256": "62f22742b58a1a33014a2b6b706588a8d7e2a88ae7bd1a6ebe8c992928483775",
+    "project": "certifi",
+    "version": "2026.7.22",
+    "license": "MPL-2.0"
+  },
+  {
+    "name": "PySocks-1.7.1-py3-none-any.whl",
+    "url": "https://files.pythonhosted.org/packages/8d/59/b4572118e098ac8e46e399a1dd0f2d85403ce8bbaad9ec79373ed6badaf9/PySocks-1.7.1-py3-none-any.whl",
+    "sha256": "2725bd0a9925919b9b51739eea5f9e2bae91e83288108a9ad338b2e3a4435ee5",
+    "project": "PySocks",
+    "version": "1.7.1",
+    "license": "BSD"
+  },
+  {
+    "name": "typing_extensions-4.16.0-py3-none-any.whl",
+    "url": "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl",
+    "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+    "project": "typing-extensions",
+    "version": "4.16.0",
+    "license": "PSF-2.0"
+  },
+  {
+    "name": "websockets-17.1-cp313-cp313-win_amd64.whl",
+    "url": "https://files.pythonhosted.org/packages/22/36/fb521f0f2994c25509651f169efe5582dddd8713d57a0757ba87859372ef/websockets-17.1-cp313-cp313-win_amd64.whl",
+    "sha256": "0340bbef6bfbe16da888b3983d666a4db4954ac3253c38f13bc7aba0c7db5a2f",
+    "project": "websockets",
+    "version": "17.1",
+    "license": "BSD-3-Clause"
+  },
+  {
+    "name": "urllib3-2.8.0-py3-none-any.whl",
+    "url": "https://files.pythonhosted.org/packages/92/9d/c4e665119135114480843e7ab388fa94d8480650450e6f8e26b70d323a4c/urllib3-2.8.0-py3-none-any.whl",
+    "sha256": "0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3",
+    "project": "urllib3",
+    "version": "2.8.0",
+    "license": "MIT"
+  },
+  {
+    "name": "gdown-6.4.0-py3-none-any.whl",
+    "url": "https://files.pythonhosted.org/packages/61/e9/c5d0eb6cb3453ac056322cf8a16a4e37631a7952ef18bd1ba442cb7ff4a8/gdown-6.4.0-py3-none-any.whl",
+    "sha256": "a0f6dd1d23119e36d594822421d151c832641b92dd32bb8d30e870d24fe55149",
+    "project": "gdown",
+    "version": "6.4.0",
+    "license": "MIT"
+  },
+  {
+    "name": "pycryptodomex-3.23.0-cp37-abi3-win_amd64.whl",
+    "url": "https://files.pythonhosted.org/packages/69/96/11f36f71a865dd6df03716d33bd07a67e9d20f6b8d39820470b766af323c/pycryptodomex-3.23.0-cp37-abi3-win_amd64.whl",
+    "sha256": "52e5ca58c3a0b0bd5e100a9fbc8015059b05cffc6c66ce9d98b4b45e023443b9",
+    "project": "pycryptodomex",
+    "version": "3.23.0",
+    "license": "BSD, Public Domain"
+  },
+  {
+    "name": "soupsieve-2.10-py3-none-any.whl",
+    "url": "https://files.pythonhosted.org/packages/66/87/5ed59e1d0290564e2027ed066c52b059892c4637741337fc0967183c8d4d/soupsieve-2.10-py3-none-any.whl",
+    "sha256": "8596eb8967d744174820280fa62b4542a2e955bfaccca73ed8a13c6eb8e9b502",
+    "project": "soupsieve",
+    "version": "2.10",
+    "license": "MIT"
+  }
+]
