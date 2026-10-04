@@ -1,141 +1,491 @@
-# Mezba Download Manger
+# Mezba Download Manager for Windows
 
-It is basically an early released version.so It have some bugs. But follow the steps and it will work with your windows version 
-perfectly. 
+<p align="center">
+  <strong>A modern, lightweight download manager for Windows with browser integration, media downloading, queue management, resume support, and background downloads.</strong>
+</p>
 
-## Installation:
-1.download the .exe file and install it.( windows will show a warning and will ask you to don't run it. just click on more info and install it anyways.)
+<p align="center">
+  <a href="https://github.com/DeveloperMezba/mezba-download-manager-windows/releases/latest">
+    <img src="https://img.shields.io/github/v/release/DeveloperMezba/mezba-download-manager-windows?label=Latest%20Release" alt="Latest Release">
+  </a>
+  <img src="https://img.shields.io/badge/Windows-10%20%7C%2011-blue" alt="Windows 10 and 11">
+  <img src="https://img.shields.io/badge/Architecture-x64-informational" alt="64-bit">
+  <img src="https://img.shields.io/badge/Status-Active%20Development-orange" alt="Active Development">
+</p>
 
-2. It will need internet connection to be installed.
+<p align="center">
+  <a href="https://github.com/DeveloperMezba/mezba-download-manager-windows/releases/latest"><strong>Download Latest Version</strong></a>
+  •
+  <a href="https://github.com/DeveloperMezba/mezba-download-manager-windows/issues">Report a Bug</a>
+  •
+  <a href="https://github.com/DeveloperMezba">Developer</a>
+</p>
 
-3. after installing it open the app and setup the browser extension to work perfectly.
+---
 
-## Add the browser extension:
+## About
 
-### Chrome, Edge, Brave, Chromium, Vivaldi
+**Mezba Download Manager**, also known as **MDM**, is a modern download manager for Windows designed to provide a simple, fast, and convenient way to manage file and media downloads.
 
-1. Open MDM → **Browser setup → Open Chromium extension folder**.
-2. Open your browser's Extensions page, such as `chrome://extensions` or `edge://extensions`.
-3. Turn on **Developer mode**, choose **Load unpacked**, and select:
+MDM combines a desktop application with browser integration so downloads can be sent directly from supported browsers to the download manager.
+
+The project is actively developed with a focus on reliable downloading, clear progress information, resumable downloads, browser integration, media downloading, and a clean Windows experience.
+
+---
+
+## Features
+
+### Download Management
+
+- File download management
+- Multiple download queue
+- Resumable direct-file downloads
+- Download progress monitoring
+- Retry and completion handling
+- Background downloading
+- Downloads can continue after the main MDM window is closed
+- Compact progress windows
+- Clear download status information
+
+### Media Downloads
+
+MDM supports several types of media downloads, including:
+
+- MP4 video
+- MKV video
+- Audio downloads
+- Playlists
+- Supported online media
+- Media processing using required background components
+
+Availability may depend on the website and the type of content being downloaded.
+
+### Google Drive
+
+MDM includes support for downloading supported public Google Drive files.
+
+Current Google Drive support is primarily intended for public single-file downloads.
+
+### Browser Integration
+
+MDM includes a browser companion extension and Windows native messaging integration.
+
+Supported Chromium-based browsers include:
+
+- Google Chrome
+- Brave
+- Microsoft Edge
+- Chromium
+- Vivaldi
+
+Firefox integration is also available, although the current Firefox extension may need to be loaded manually depending on the version being used.
+
+---
+
+## Download
+
+The recommended way to install Mezba Download Manager is through the official GitHub Releases page.
+
+### [Download the Latest Windows Release](https://github.com/DeveloperMezba/mezba-download-manager-windows/releases/latest)
+
+Download the Windows x64 installer from the **Assets** section of the latest release.
+
+The installer filename may look similar to:
 
 ```text
-%LOCALAPPDATA%\Programs\Mezba Download Manager\app\extension\chromium
+Mezba-Download-Manager-x.x.x-Windows-x64-Setup.exe
 ```
-Paste this path into the Windows file picker or browse to the folder opened by MDM. The installer already registers the matching native-messaging host for your account. Do not change the Chromium manifest key.
 
-4. Pin the extension and reload open video pages. Click **↓ MDM** beside a visible video, or use the toolbar button.
-5. Choose a video quality/format or audio, then Download. A small progress window opens and the task also appears in the app.
+Always download MDM from this official repository.
 
-### Firefox
+---
 
-Open `about:debugging` → This Firefox → Load Temporary Add-on. Choose:
+## System Requirements
+
+- Windows 10 or Windows 11
+- 64-bit Windows
+- Internet connection
+- Sufficient free storage space for downloads
+- Additional temporary storage may be required during media processing
+
+An internet connection is particularly important during the initial setup because MDM may need to download required components.
+
+---
+
+## Installation
+
+1. Open the [Releases](https://github.com/DeveloperMezba/mezba-download-manager-windows/releases) page.
+2. Open the latest release.
+3. Download the Windows x64 setup file from the **Assets** section.
+4. Close any older MDM installation before installing an update.
+5. Run the installer.
+6. Complete the installation.
+7. Launch **Mezba Download Manager**.
+8. Allow the initial setup to download any required components.
+9. Configure browser integration from the application's browser setup section.
+
+---
+
+## Windows SmartScreen
+
+Current builds may not yet be digitally code-signed.
+
+Because of this, Windows SmartScreen may display a warning when you run the installer.
+
+Make sure the installer was downloaded directly from:
 
 ```text
-%LOCALAPPDATA%\Programs\Mezba Download Manager\app\extension\firefox\manifest.json
+https://github.com/DeveloperMezba/mezba-download-manager-windows
 ```
 
-This is an unsigned preview, so Firefox removes the temporary add-on after restarting. Permanent normal Firefox distribution requires Mozilla signing. The installer cannot silently add extensions to your browser.
+If Windows SmartScreen appears, verify that the installer came from the official GitHub repository before continuing.
 
-### Mezba Download Manager for Windows 0.1.2
+---
 
-Windows edition of MDM, based on Linux 0.3.1. Includes MP4/MKV video, audio, playlist downloads, a browser companion, compact progress windows, resumable direct files, a download queue, public Google Drive files, and manual GitHub update checks.
+## Browser Setup
 
-#### Windows 0.1.2: completion fix and separate tool updates
+After installing MDM, configure the browser companion extension so downloads can be transferred from your browser to the desktop application.
 
-This release intentionally corrects the version sequence to **0.1.2**, replacing the earlier build labelled 1.1.0. It fixes a Windows MP4 finalization error: the converter opened its finished temporary file read-only before calling `os.fsync`, which Windows can reject with `[Errno 9] Bad file descriptor`. The final flush now uses a writable handle before publishing the output. Real conversion and disk failures still remain errors, and the source file is preserved.
+For Chromium-based browsers:
 
-The familiar layout remains, with subtle card borders, a selected sidebar state, slimmer progress bars and clearer status colors. The new **Update** button opens two options: **App update** and **Download tools**.
+1. Open Mezba Download Manager.
+2. Open the browser setup or integration section.
+3. Follow the extension installation instructions.
+4. Install or load the MDM browser extension.
+5. Allow MDM's native browser integration when required.
+6. Reload the browser extension after updating MDM if necessary.
+7. Restart the browser if integration does not become active immediately.
 
-1. Pause downloads, close MDM and its progress windows, and exit Chrome/Brave.
-2. Run `Mezba-Download-Manager-0.1.2-Windows-x64-Setup.exe` under the same Windows account. Install over your current copy; keep your downloads and State folder.
-3. Reopen MDM. In your browser's Extensions page, reload MDM and confirm version **0.1.2**, then refresh video pages. If your browser will not reload the lower version number, remove only the extension and Load unpacked again from the installed folder below.
-4. For an old task still marked Error, click **Retry** using its existing folder and format. The engine reuses retained downloads where possible and performs finalization again. Existing error records are not silently reclassified as complete.
+Supported Chromium-based browsers include:
 
-The screenshot error and a matching code defect were identified. The supplied installer is built on Linux; actual Windows Chrome/Brave end-to-end verification still needs your PC. See `docs/TEST-REPORT.md` for the precise checks performed.
+- Google Chrome
+- Brave
+- Microsoft Edge
+- Chromium
+- Vivaldi
 
+---
 
+## Firefox
 
+Firefox support is available separately from Chromium browser integration.
 
+Depending on the current MDM release, the Firefox companion may require manual installation or temporary loading.
 
+A permanently signed Firefox extension may be provided in a future release.
 
-## Download options
-
-The scrollable menu includes the current video/audio and, when detected, full-playlist video/audio. Keep playlist information in the link, such as a YouTube `list=` parameter. A playlist task produces separate numbered files. Completed items are recorded so retries can skip them.
-
-- **MP4:** H.264 video with 8-bit YUV420p and AAC audio when audio exists. Compatible streams copy directly; other streams convert using FFmpeg. Conversion may take time and additional space. For older devices, start with 720p or 1080p.
-- **MKV:** preserves the source video/audio codecs without re-encoding.
-- **Audio:** original quality or MP3 conversion.
-- **Direct files:** paste the file URL or right-click a browser link → Download with MDM.
-- **Google Drive:** use a public single-file sharing link. Private Drive OAuth, folders, quota bypass, and Google Docs exports are not supported.
-
-The native Windows interface keeps the dark mint/slate style and controls, using Tk instead of Linux GTK. Native fonts, spacing, and window borders differ. The browser interface is carried over from the Linux version.
-
-## Large files, pausing and recovery
-
-The direct HTTP engine streams in bounded buffers and uses 64-bit file offsets. Segmented resume requires server byte-range support and a stable ETag/Last-Modified validator. MDM refuses to append to a changed or unverifiable file. Use Details → Replace expired link after pausing a direct-file task.
-
-Closing the app/progress window leaves downloads running. Preferences → Stop background service stops MDM. After a crash or reboot, reopen MDM and resume recovered paused jobs. There is no login startup service or protection against sleep in this release.
-
-Use **NTFS or exFAT** for large files, not FAT32. Keep partial files and `.mdm-state` checkpoints. Leave extra space for merging/conversion. MP4 conversion restarts from the preserved downloaded source after an interruption. Video/Drive resume is handled by their engines and depends on the source.
-
-Windows Job Objects are used to stop media subprocesses when the owning service exits. This Windows-specific behavior still needs a real Windows test. The Python service uses authenticated, per-user loopback IPC. It is not an HTTP server and is not exposed on the network. Its random access token is in the current user's state folder; setup restricts that folder's Windows permissions to the user.
+---
 
 ## Updates
 
-Click **Update** in the sidebar. A small in-app window offers:
+MDM includes an update system designed to keep both the application and its required download components up to date.
 
-### App update
+Inside Mezba Download Manager, use:
 
-Open App update, enter your trusted GitHub `owner/repository` (or repository URL), then click **Check & install update**. MDM remembers the repository. Your public release must contain the Windows Setup EXE and `SHA256SUMS`. The installer is verified before it runs. Setup preserves your download history and settings.
+```text
+Check for updates
+```
 
-No repository was supplied with this request, so the field is ready for you to fill in. The GitHub build workflow automatically embeds the repository it runs in. Use a separate Windows repository from Linux. Because the numbering changed, publish **v0.1.2** and explicitly mark it as **Latest**. Legacy tags `v1.0.0` and `v1.1.0` are rejected by this release's updater to avoid installing the old build again. The next release should be **v0.1.3**. See `docs/BUILD-AND-PUBLISH.md`.
+The update system can handle two main types of updates.
 
-### Download tools
+### Application Update
 
-Click **Check & update tools** to update tools independently of MDM:
+Checks for a newer version of Mezba Download Manager from the official GitHub repository.
 
-- **yt-dlp** and its **EJS** JavaScript helper.
-- **Deno**.
-- **FFmpeg and ffprobe** together.
-- **gdown** for Google Drive and the compatible Python dependencies used by these packages.
+### Download Tools and Components
 
-Installed versions appear in the window. Python packages come from PyPI as resolved, SHA-256-pinned wheels; Deno and FFmpeg come from their configured upstream GitHub releases with SHA-256 verification. A replacement bundle is installed and smoke-tested separately. Downloads continue during preparation, then briefly pause for the switch and resume if they were running. Previously paused tasks stay paused. The previous bundle is retained. Download or validation failures do not switch the active tools. Closing the update window or main app leaves the service performing the update.
+Checks supported background components used by MDM and updates them when appropriate.
 
-A new upstream version does not immediately break the old one. Website changes can make older download tools stop working, which is why independent updates are useful. These checks cannot guarantee support for every website or future tool release. Python/Tk itself remains part of MDM's app installer. A tool requiring a newer Python runtime may require a later MDM app release.
+Components used by the Windows edition may include tools such as:
 
-Allow about **1 GB free space** for staging a tool update, with additional space for retained tool bundles. Downloads use the verified newer bundle on their next start. There is no automatic background update polling, no system-wide pip installation, and no system PATH change. Reload the browser extension after an **app** update; a tools-only update does not require an extension reload.
+- FFmpeg
+- ffprobe
+- Deno
+- yt-dlp
+- Other required downloading or media-processing components
 
-To update the app manually, pause downloads, close MDM and your browser, and run the new Windows installer. Do not install a Linux ZIP over this Windows edition.
+Updates are performed when requested by the user.
+
+Where supported, update downloads may be verified before installation and MDM attempts to preserve existing application data during the update process.
+
+---
+
+## FFmpeg, yt-dlp, and Deno
+
+Normal users should not need to manually install FFmpeg, ffprobe, yt-dlp, Deno, Python, Java, or other development dependencies simply to use the Windows version.
+
+MDM is designed to manage its required download and media-processing components automatically where possible.
+
+This helps make installation simpler for normal Windows users.
+
+---
+
+## Download Queue
+
+MDM can manage multiple downloads through its download queue.
+
+This allows you to:
+
+- Add multiple downloads
+- Track download progress
+- Manage active downloads
+- Retry failed downloads
+- Continue supported downloads
+- Keep downloads running without keeping the main application window open
+
+---
+
+## Resume Support
+
+Supported direct-file downloads can be resumed when the server allows partial or range downloads.
+
+Resume capability can vary depending on:
+
+- The server
+- The website
+- The download source
+- The file type
+- Whether the server supports range requests
+
+Some media downloads may use different resume behavior depending on the source.
+
+---
+
+## Download Completion
+
+MDM distinguishes between the transfer reaching 100% and the entire download process actually being finished.
+
+Some media downloads require additional processing after the transfer reaches 100%.
+
+For example, MDM may need to:
+
+- Merge audio and video streams
+- Process downloaded media
+- Convert or finalize a file
+- Run FFmpeg processing
+- Verify the completed output
+
+The download should only be considered finished after all required processing has completed successfully.
+
+---
+
+## Background Downloads
+
+MDM is designed so supported downloads can continue even when the main application window is closed.
+
+The exact behavior may depend on:
+
+- The type of download
+- The download component being used
+- Windows power settings
+- Whether Windows enters sleep mode
+- Whether the computer is shut down
+
+Windows sleep or shutdown can still interrupt active downloads.
+
+---
+
+## Known Limitations
+
+Mezba Download Manager is still under active development.
+
+Current limitations may include:
+
+- The Windows build may not yet be digitally signed.
+- Some websites use DRM or anti-bot systems that prevent normal downloading.
+- Content requiring account authentication may not always be accessible.
+- Some websites may change their internal systems and temporarily break media downloading.
+- Google Drive support currently focuses mainly on supported public file downloads.
+- Google Drive folder downloading may not be fully supported.
+- Firefox browser integration may require manual setup.
+- Windows sleep or shutdown can interrupt downloads.
+- Some browser and Windows combinations may require additional real-world testing.
+- Some servers do not support resumable downloads.
+- Website-specific restrictions may prevent certain downloads.
+
+MDM is not intended to bypass DRM, account restrictions, website security systems, or access controls.
+
+---
 
 ## Troubleshooting
 
-- **Setup cannot download tools:** verify internet access and that GitHub release downloads are reachable, then rerun the installer. Read the installer details. It verifies hashes and does not install a corrupt download.
-- **Browser cannot connect:** use the installed extension folder above, reload it, and reopen the video page. Do not load the extension from an extracted source archive. Run the installer under the same Windows account as the browser.
-- **A video is not found:** open its individual video/reel/post page. Try the toolbar and detected sources. Site login rules, unsupported formats, anti-bot blocks, deleted sources, and DRM can prevent downloading.
-- **Chrome/Brave cookie error:** for public videos, set Preferences → Signed-in browser session to **Off** and retry. For media that requires login, a supported Firefox session may work. Do not disable browser cookie encryption or Windows protections.
-- **Signed-in videos:** optionally select your browser in Preferences. Cookie/keyring restrictions, especially newer Chromium cookie protections, can still prevent access. No cookies are sent to an MDM cloud service.
-- **MP4 takes time at 100%:** FFmpeg may still be merging or converting. Check the processing message. Do not delete its intermediate files.
-- **Windows paths are too long:** use a shorter download folder, such as `D:\MDM`.
-- **An interrupted update blocks startup:** close MDM, run the same/newer installer again, and let it finish. The installer repairs its update marker and restores the queue when possible.
+### Browser sends a download but nothing starts
 
-Diagnostic command in PowerShell, after installation:
+Try the following:
 
-```powershell
-& "$env:LOCALAPPDATA\Programs\Mezba Download Manager\runtime\python.exe" "$env:LOCALAPPDATA\Programs\Mezba Download Manager\app\mdm.py" --doctor
-```
+1. Make sure Mezba Download Manager is installed.
+2. Open MDM at least once.
+3. Re-run the browser integration setup.
+4. Reload the browser extension.
+5. Restart your browser.
+6. Restart MDM.
+7. Try the download again.
 
-Logs/history/settings are under:
+### Brave or Chrome integration is not working
+
+Reload the MDM browser extension and verify that browser integration has been completed correctly.
+
+If you recently updated MDM, restart both MDM and the browser.
+
+### Download reaches 100% but does not immediately show Completed
+
+Some media downloads require post-processing after the transfer reaches 100%.
+
+Wait until MDM finishes processing, merging, converting, or finalizing the file.
+
+### Media conversion fails
+
+If media processing fails, MDM attempts to preserve downloaded files where possible so the original downloaded data is not unnecessarily lost.
+
+### Download cannot be resumed
+
+The download server may not support resumable or range-based downloads.
+
+In that situation, the file may need to restart from the beginning.
+
+### A website refuses to download
+
+Some websites may require:
+
+- Login credentials
+- Browser cookies
+- Anti-bot verification
+- DRM-protected playback
+- Website-specific handling
+- Additional authentication
+
+Not every website or protected stream can be supported.
+
+---
+
+## Reporting Bugs
+
+If something does not work, please report it through GitHub Issues.
+
+### [Open an Issue](https://github.com/DeveloperMezba/mezba-download-manager-windows/issues)
+
+When reporting a problem, please include as much of the following information as possible:
+
+- MDM version
+- Windows version
+- Browser name
+- Browser version
+- Type of download
+- Website or download source when appropriate
+- What you expected to happen
+- What actually happened
+- Error message
+- Screenshot if available
+- Steps needed to reproduce the problem
+
+Detailed reports make bugs much easier to reproduce and fix.
+
+---
+
+## Feature Requests
+
+Ideas and suggestions are welcome.
+
+If you have an idea for a new feature or improvement, open an issue and describe:
+
+- What you would like MDM to do
+- Why the feature would be useful
+- How you expect it to work
+
+### [Request a Feature](https://github.com/DeveloperMezba/mezba-download-manager-windows/issues)
+
+---
+
+## Project Status
+
+MDM for Windows is under **active development**.
+
+The project is continuously being improved with a focus on:
+
+- Download reliability
+- Browser integration
+- Better download status reporting
+- Improved error handling
+- Media downloading
+- Update management
+- Windows integration
+- User experience
+- Performance
+- Stability
+- Download queue improvements
+- Better resume support
+
+This repository should currently be considered an actively developed project rather than a completely finished final product.
+
+---
+
+## Linux Version
+
+Mezba Download Manager also has a separate Linux edition.
+
+Visit the DeveloperMezba GitHub profile to find the Linux version:
+
+### [DeveloperMezba on GitHub](https://github.com/DeveloperMezba)
+
+---
+
+## Official Repository
+
+The official Windows repository is:
 
 ```text
-%LOCALAPPDATA%\Mezba Download Manager\State
+https://github.com/DeveloperMezba/mezba-download-manager-windows
 ```
 
-Do not publish queue databases, logs, cookies, or temporary URLs that may contain access tokens.
+Please avoid downloading modified or unofficial copies from unknown sources.
 
-## Uninstall
+---
 
-Close MDM and its browser progress windows. Use Windows Settings → Apps → Mezba Download Manager → Uninstall, or run its `Uninstall.exe`. Downloaded files and history/settings are preserved. Remove the browser extension separately. To remove saved history too, stop MDM first and delete its State folder yourself.
+## Contributing
 
-## Verification status
+Contributions, bug reports, testing feedback, and useful suggestions are welcome.
 
-The installer and launchers are real Windows PE executables compiled from the included source. The build environment is Linux. Windows installation, Tk rendering, Registry integration, Job Objects, and playback have **not been executed on a Windows machine** here. See `docs/TEST-REPORT.md` for tests that were actually run and the remaining Windows checks. This is an initial Windows preview, not a claim of a fully tested production release or complete IDM parity.
+If you would like to contribute:
+
+1. Fork the repository.
+2. Create a new branch for your change.
+3. Make your changes.
+4. Test the changes carefully.
+5. Submit a pull request with a clear explanation.
+
+For major changes, opening an issue first is recommended so the idea can be discussed before implementation.
+
+---
+
+## Developer
+
+Created and maintained by **DeveloperMezba**.
+
+GitHub:
+
+### [@DeveloperMezba](https://github.com/DeveloperMezba)
+
+---
+
+## Support the Project
+
+If Mezba Download Manager is useful to you:
+
+- Star the repository
+- Report bugs
+- Suggest improvements
+- Share the project
+- Contribute code or testing feedback
+
+Every contribution helps improve MDM.
+
+---
+
+<p align="center">
+  <strong>Mezba Download Manager</strong><br>
+  Download smarter on Windows.
+</p>
+
+<p align="center">
+  ⭐ If MDM is useful to you, consider starring the repository.
+</p>
