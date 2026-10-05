@@ -18,6 +18,8 @@
   •
   <a href="https://github.com/DeveloperMezba/mezba-download-manager-windows/issues">Report a Bug</a>
   •
+  <a href="https://github.com/DeveloperMezba/mezba-download-manager-linux/">Linux Version</a>
+  •
   <a href="https://github.com/DeveloperMezba">Developer</a>
 </p>
 
