@@ -1,5 +1,18 @@
 # Changes
 
+## Windows 0.1.3
+
+- New look: refreshed desktop app and browser extension (popup, progress window, in-page button) with status colours, count badges, rounded progress bars and clearer buttons.
+- Smoother list: downloads update in place, so no more flicker, lost scroll position or restarting progress animation every second.
+- Dialogs now size to their content and follow Windows display scaling (fixes clipped buttons at 125%/150%); they open centred, close with Esc, never stack, and support Enter. Dropdown lists match the dark theme.
+- DPI-aware, crisp text; window size/position is remembered; app icon shown in the window.
+- Ctrl+N (new download), Ctrl+F (search), auto-detects video links, pre-fills a copied link, friendlier ETA (2h 07m instead of 7620s).
+- "Open MDM" from the browser now brings the already-open window to the front instead of doing nothing.
+- Stop background service asks for confirmation.
+- Extension: removed wrong "Linux" wording; Enter key in the popup; detected video sources no longer vanish when the browser puts the extension to sleep; scrolling pages with players is lighter.
+- Service: a damaged settings/history file no longer prevents startup; the scheduler survives a failed task; clearer validation messages; a download engine that stays silent for 4 minutes is stopped with an actionable error instead of hanging.
+- Tests added for these changes. Windows installer must be built by the GitHub workflow (tag v0.1.3).
+
 ## Windows 0.1.2
 
 - Correct the release number to 0.1.2, intentionally replacing the earlier 1.1.0 label.
