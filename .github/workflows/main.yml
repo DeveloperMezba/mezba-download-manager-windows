@@ -57,7 +57,14 @@ jobs:
           }
           if (-not $makensis) {
             choco install nsis -y --no-progress
-            $makensis = (Get-Command makensis.exe -ErrorAction SilentlyContinue).Source
+            $candidates = @(
+              "C:\Program Files (x86)\NSIS\makensis.exe",
+              "C:\Program Files\NSIS\makensis.exe"
+            )
+            $makensis = $candidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+          }
+          if (-not $makensis) {
+            $makensis = Get-ChildItem -Path "C:\ProgramData\chocolatey\lib" -Filter makensis.exe -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
           }
           if (-not $makensis) { throw "makensis.exe not found even after installing NSIS" }
           "MAKENSIS_PATH=$makensis" | Out-File -FilePath $env:GITHUB_ENV -Append
