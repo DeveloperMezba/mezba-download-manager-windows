@@ -14,6 +14,7 @@ from .platform_support import hidden_process, stop_process_tree, worker_python
 from .http_engine import DownloadError, Paused
 
 ANALYZE_LOCK = threading.BoundedSemaphore(2)
+STARTUP_TIMEOUT = 240  # seconds of total silence after launch before a video task is reported as stalled
 
 def module_cmd(name):
     if importlib.util.find_spec(name) is None:
@@ -230,9 +231,19 @@ def run_external(task, settings, stop, progress, item_progress=None):
                             stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, encoding="utf-8", errors="replace",
                             start_new_session=True, bufsize=1, **hidden_process())
     tail, files = [], []
-    terminated = threading.Event()
+    terminated, stalled, heard = threading.Event(), threading.Event(), threading.Event()
+    started = time.monotonic()
     def watcher():
         while proc.poll() is None:
+            if task['kind'] != 'drive' and not heard.is_set() and time.monotonic() - started > STARTUP_TIMEOUT:
+                stalled.set()
+                stop_process_tree(proc)
+                try:
+                    proc.wait(timeout=12)
+                except subprocess.TimeoutExpired:
+                    stop_process_tree(proc)
+                terminated.set()
+                return
             if stop.wait(0.2):
                 stop_process_tree(proc)
                 try:
@@ -243,6 +254,7 @@ def run_external(task, settings, stop, progress, item_progress=None):
                 return
     threading.Thread(target=watcher, daemon=True).start()
     for line in proc.stdout:
+        heard.set()
         line = line.strip()
         if line.startswith('MDM_PROGRESS '):
             try:
@@ -266,6 +278,10 @@ def run_external(task, settings, stop, progress, item_progress=None):
             tail = (tail + [line])[-12:]
     proc.stdout.close()
     result = proc.wait()
+    if stalled.is_set() and not stop.is_set():
+        raise DownloadError('The download engine produced no output for ' + str(STARTUP_TIMEOUT // 60) + ' minutes and was stopped. '
+                            'This is usually a blocked network connection or firewall (check deno.exe/yt-dlp.exe), or a '
+                            'site that needs sign-in. Try Update > Check & update tools, then Retry.')
     if stop.is_set() or terminated.is_set():
         raise Paused('Paused; engine partial files retained.')
     if result:
