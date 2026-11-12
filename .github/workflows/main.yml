@@ -43,6 +43,16 @@ jobs:
         shell: pwsh
         run: |
           Get-ChildItem -Path dist
+- name: Install Dependencies & PyInstaller
+        shell: pwsh
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+          
+          # যদি JSON ফাইল থেকে প্যাকেজগুলো ইনস্টল করতে চান, তবে স্ক্রিপ্ট বা পাইথন দিয়ে পার্স করে নিতে হবে
+          if (Test-Path "build/python-packages-lock.json") {
+              python -c "import json; data = json.load(open('build/python-packages-lock.json')); import subprocess; [subprocess.run(['pip', 'install', p]) for p in data]"
+          }
 
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v2
