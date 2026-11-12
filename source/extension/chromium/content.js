@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const overlays = new Map();
-  const style = `:host{all:initial;font-family:system-ui,sans-serif;color:#eaf0fb}*{box-sizing:border-box}button,select{font:600 13px system-ui,sans-serif;border-radius:9px;border:1px solid #34455f;padding:9px 12px;background:#172435;color:#eaf0fb;cursor:pointer}button:hover{background:#2c4356}button:disabled{opacity:.6;cursor:wait}.trigger,.download{background:#70e0c2;color:#0b2821;border-color:#70e0c2}.trigger{display:block;margin-left:auto}.panel{margin-top:6px;width:100%;padding:14px;border:1px solid #34455f;border-radius:13px;background:#101925;box-shadow:0 8px 30px #0007;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}.panel[hidden]{display:none}select{width:100%;min-width:0;margin:10px 0}p{font:12px/1.5 system-ui,sans-serif;white-space:normal;overflow-wrap:anywhere;margin:0 0 9px}.row{display:flex;gap:8px;flex-wrap:wrap}.note{color:#9cacc1}` + MDMMenu.css;
+  const style = `:host{all:initial;font-family:"Segoe UI",system-ui,sans-serif;color:#e9eff9}*{box-sizing:border-box}button,select{font:600 13px "Segoe UI",system-ui,sans-serif;border-radius:10px;border:1px solid #25324a;padding:9px 13px;background:#1b2436;color:#e9eff9;cursor:pointer;transition:background .12s}button:hover{background:#232f47}button:focus-visible,select:focus-visible{outline:2px solid #5eead4;outline-offset:2px}button:disabled{opacity:.55;cursor:progress}.trigger,.download{background:#5eead4;color:#06211d;border-color:#5eead4}.trigger:hover,.download:hover{background:#8ff3e2}.trigger{display:block;margin-left:auto;box-shadow:0 4px 18px #0006}.panel{margin-top:6px;width:100%;padding:14px;border:1px solid #25324a;border-radius:14px;background:#0f1520;box-shadow:0 12px 40px #000a;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#25324a transparent}.panel[hidden]{display:none}select{width:100%;min-width:0;margin:10px 0}p{font:12px/1.5 "Segoe UI",system-ui,sans-serif;white-space:normal;overflow-wrap:anywhere;margin:0 0 9px}.row{display:flex;gap:8px;flex-wrap:wrap}.note{color:#93a3bd}` + MDMMenu.css;
   function send(message) {
     return new Promise((resolve, reject) => chrome.runtime.sendMessage(message, response => {
       if (chrome.runtime.lastError) reject(new Error(chrome.runtime.lastError.message));
@@ -107,9 +107,12 @@
     for(const [video,{host}] of overlays) if(!video.isConnected || !videos.includes(video)){host.remove();overlays.delete(video);}
     for(const video of videos){if(!overlays.has(video))attach(video);place(video,overlays.get(video));}
   }
-  setInterval(update,800);
-  addEventListener('scroll',update,{passive:true});addEventListener('resize',update,{passive:true});
-  window.visualViewport?.addEventListener('resize',update,{passive:true});
-  window.visualViewport?.addEventListener('scroll',update,{passive:true});
+  // Scroll/resize events can fire many times per frame; do the layout work once per frame.
+  let frame = 0;
+  const schedule = () => { if (!frame) frame = requestAnimationFrame(() => { frame = 0; update(); }); };
+  setInterval(update,1000);
+  addEventListener('scroll',schedule,{passive:true,capture:true});addEventListener('resize',schedule,{passive:true});
+  window.visualViewport?.addEventListener('resize',schedule,{passive:true});
+  window.visualViewport?.addEventListener('scroll',schedule,{passive:true});
   update();
 })();
