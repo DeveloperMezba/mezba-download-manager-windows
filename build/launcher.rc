@@ -1,8 +1,8 @@
 1 ICON "mdm.ico"
 1 24 "app.manifest"
 1 VERSIONINFO
-FILEVERSION 0,1,2,0
-PRODUCTVERSION 0,1,2,0
+FILEVERSION 0,1,3,0
+PRODUCTVERSION 0,1,3,0
 FILEOS 0x40004
 FILETYPE 1
 BEGIN
@@ -12,9 +12,9 @@ BEGIN
   BEGIN
    VALUE "CompanyName", "Mezba Download Manager"
    VALUE "FileDescription", "Mezba Download Manager for Windows"
-   VALUE "FileVersion", "0.1.2.0"
+   VALUE "FileVersion", "0.1.3.0"
    VALUE "ProductName", "Mezba Download Manager"
-   VALUE "ProductVersion", "0.1.2"
+   VALUE "ProductVersion", "0.1.3"
   END
  END
  BLOCK "VarFileInfo"
