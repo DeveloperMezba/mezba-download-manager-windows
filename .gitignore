@@ -1,0 +1,11 @@
+dist/
+installer/
+build-cache/
+test-deps/
+.venv/
+__pycache__/
+*.pyc
+*.log
+*.sqlite*
+*.mdm-part
+*.mdm-state
