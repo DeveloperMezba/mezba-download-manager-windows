@@ -1,6 +1,6 @@
 # Build and publish MDM Windows
 
-The supplied setup EXE is already compiled. These instructions are for changing the source and publishing your own releases. This Windows bugfix release is **0.1.2**, replacing the legacy-numbered 1.1.0 build with a Windows completion fix, subtle UI polish and separate download-tool updates. Keep Windows and Linux in separate repositories so their release/version sequences do not conflict.
+The supplied setup EXE is already compiled. These instructions are for changing the source and publishing your own releases. This Windows bugfix release is **0.1.3**, replacing the legacy-numbered 1.1.0 build with a Windows completion fix, subtle UI polish and separate download-tool updates. Keep Windows and Linux in separate repositories so their release/version sequences do not conflict.
 
 ## Source layout
 
@@ -45,7 +45,7 @@ Put your MinGW-w64 `bin` folder on the current terminal's PATH first, or pass ab
 Output:
 
 ```text
-dist/Mezba-Download-Manager-0.1.2-Windows-x64-Setup.exe
+dist/Mezba-Download-Manager-0.1.3-Windows-x64-Setup.exe
 dist/SHA256SUMS
 ```
 
@@ -87,7 +87,7 @@ Create an empty **public** repository at https://github.com/new, for example `me
 git init
 git branch -M main
 git add .
-git commit -m "Add MDM Windows 0.1.2"
+git commit -m "Add MDM Windows 0.1.3"
 git remote add origin https://github.com/YOUR-USERNAME/mezba-download-manager-windows.git
 git push -u origin main
 ```
@@ -101,18 +101,18 @@ The included GitHub workflow builds/tests on Windows when a `vX.Y.Z` tag is push
 For your first release:
 
 ```text
-git tag v0.1.2
-git push origin v0.1.2
+git tag v0.1.3
+git push origin v0.1.3
 ```
 
 Check the Actions log. The workflow is supplied for your use; it has not been executed on your repository by this build. If it fails, fix the issue before publishing.
 
-For a manual release, set `source/update-source.json` to your repository, rebuild, and use GitHub → Releases → Draft a new release. Choose `v0.1.2`, upload the actual setup EXE and `SHA256SUMS`, leave prerelease unchecked, and mark the release as Latest. Disable the automatic publishing workflow before pushing the tag if you plan to publish manually.
+For a manual release, set `source/update-source.json` to your repository, rebuild, and use GitHub → Releases → Draft a new release. Choose `v0.1.3`, upload the actual setup EXE and `SHA256SUMS`, leave prerelease unchecked, and mark the release as Latest. Disable the automatic publishing workflow before pushing the tag if you plan to publish manually.
 
 The app requires these exact asset names, using the matching version:
 
 ```text
-Mezba-Download-Manager-0.1.2-Windows-x64-Setup.exe
+Mezba-Download-Manager-0.1.3-Windows-x64-Setup.exe
 SHA256SUMS
 ```
 
@@ -137,8 +137,8 @@ Official references:
 
 ## Corrected numbering and independent tools
 
-This release deliberately resets the Windows series to 0.1.2. Mark v0.1.2 as the latest GitHub release, even if legacy 1.x tags exist. The workflow uses `--latest`. Continue with 0.1.3. The updater rejects the legacy 1.0.0 and 1.1.0 tags.
+This release deliberately resets the Windows series to 0.1.3. Mark v0.1.3 as the latest GitHub release, even if legacy 1.x tags exist. The workflow uses `--latest`. Continue with 0.1.3. The updater rejects the legacy 1.0.0 and 1.1.0 tags.
 
 `source/sitecustomize.py` and `source/mdm_components.py` must remain in the installed app folder. The private runtime's existing `_pth` includes `../app` and `import site`, which loads the selected verified tool bundle for every engine subprocess. Updated tools live under the install directory's `components` folder. App upgrades preserve that folder; uninstall removes it.
 
-The supplied 0.1.2 installer reuses the unchanged private runtime extracted from the user's 1.1.0 installer, and recompiles both launchers and the NSIS setup from the included source. The normal build script can reconstruct the runtime from the unchanged lock files.
+The supplied 0.1.3 installer reuses the unchanged private runtime extracted from the user's 1.1.0 installer, and recompiles both launchers and the NSIS setup from the included source. The normal build script can reconstruct the runtime from the unchanged lock files.
