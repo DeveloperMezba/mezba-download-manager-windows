@@ -40,7 +40,7 @@ def main():
         print('MDM', __version__, '\nPython:', sys.version.split()[0])
         for module in ('tkinter', 'yt_dlp', 'gdown'):
             print(module + ':', 'available' if importlib.util.find_spec(module) else 'MISSING')
-        for tool in ('ffmpeg', 'deno', 'node', 'qjs', 'xdg-open'):
+        for tool in ('ffmpeg', 'ffprobe', 'deno', 'node', 'qjs'):
             print(tool + ':', shutil.which(tool) or 'not installed')
         print('YouTube needs Deno >=2.3, Node >=22, or a supported QuickJS. Check its --version.')
     elif args.stop or args.list or args.add:
