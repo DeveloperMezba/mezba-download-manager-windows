@@ -80,17 +80,17 @@ Section "Install"
 prepare_done:
  SetOutPath "$INSTDIR"
  SetOverwrite on
- File "${PAYLOAD}/MDM.exe"
- File "${PAYLOAD}/MDMNativeHost.exe"
+ File "${PAYLOAD}\MDM.exe"
+ File "${PAYLOAD}\MDMNativeHost.exe"
  SetOverwrite off
  SetOutPath "$INSTDIR\runtime"
- File /r "${PAYLOAD}/runtime/*"
+ File /r "${PAYLOAD}\runtime\*"
  SetOverwrite on
  SetOutPath "$INSTDIR\app"
- File /r "${PAYLOAD}/app/*"
+ File /r "${PAYLOAD}\app\*"
  SetOutPath "$INSTDIR"
- File "${PAYLOAD}/README.md"
- File "${PAYLOAD}/LICENSE"
+ File "${PAYLOAD}\README.md"
+ File "${PAYLOAD}\LICENSE"
  DetailPrint "Downloading and verifying media tools. First setup needs internet access."
  nsExec::ExecToLog '"$INSTDIR\runtime\python.exe" "$INSTDIR\app\setup_windows.py" finish'
  Pop $0
