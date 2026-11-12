@@ -44,10 +44,29 @@ jobs:
               python -c 'import json, subprocess; pkgs = json.load(open("build/python-packages-lock.json")); reqs = [p["project"] + "==" + p["version"] for p in pkgs]; subprocess.check_call(["pip", "install"] + reqs)'
           }
 
+      - name: Ensure NSIS is available
+        shell: pwsh
+        run: |
+          $makensis = (Get-Command makensis.exe -ErrorAction SilentlyContinue).Source
+          if (-not $makensis) {
+            $candidates = @(
+              "C:\Program Files (x86)\NSIS\makensis.exe",
+              "C:\Program Files\NSIS\makensis.exe"
+            )
+            $makensis = $candidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+          }
+          if (-not $makensis) {
+            choco install nsis -y --no-progress
+            $makensis = (Get-Command makensis.exe -ErrorAction SilentlyContinue).Source
+          }
+          if (-not $makensis) { throw "makensis.exe not found even after installing NSIS" }
+          "MAKENSIS_PATH=$makensis" | Out-File -FilePath $env:GITHUB_ENV -Append
+          Write-Host "Using makensis: $makensis"
+
       - name: Run Build Script
         shell: pwsh
         run: |
-          python build/build.py --version "$env:MDM_VERSION"
+          python build/build.py --version "$env:MDM_VERSION" --makensis "$env:MAKENSIS_PATH"
 
       - name: Verify Installer Output
         shell: pwsh
