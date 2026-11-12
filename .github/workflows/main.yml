@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch: # এটি যোগ করলে Actions ট্যাবে "Run workflow" বাটন চলে আসবে
 
 jobs:
   build-windows:
