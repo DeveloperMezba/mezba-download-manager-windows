@@ -4,7 +4,7 @@ Unicode True
 !include "WinVer.nsh"
 !include "FileFunc.nsh"
 !ifndef VERSION
-!define VERSION "0.1.2"
+!define VERSION "0.1.3"
 !endif
 !ifndef PAYLOAD
 !error "Define PAYLOAD as the staged application directory"
@@ -20,7 +20,7 @@ SetCompressor /SOLID lzma
 SetCompressorDictSize 32
 Icon "mdm.ico"
 UninstallIcon "mdm.ico"
-VIProductVersion "0.1.2.0"
+VIProductVersion "0.1.3.0"
 VIAddVersionKey /LANG=1033 "ProductName" "Mezba Download Manager"
 VIAddVersionKey /LANG=1033 "FileDescription" "MDM Windows installer"
 VIAddVersionKey /LANG=1033 "FileVersion" "${VERSION}"
