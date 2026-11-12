@@ -27,15 +27,15 @@ class WindowsPort(unittest.TestCase):
             with self.assertRaises(ValueError):updater.repository(text)
     def test_update_installer_checksum_and_repository(self):
         import hashlib
-        data=b'MZ'+b'installer-fixture';digest=hashlib.sha256(data).hexdigest();name='Mezba-Download-Manager-0.1.3-Windows-x64-Setup.exe'
-        base='https://github.com/me/mdm/releases/download/v0.1.3/'
-        release={'tag_name':'v0.1.3','assets':[{'name':name,'size':len(data),'digest':'sha256:'+digest,'browser_download_url':base+name},{'name':'SHA256SUMS','browser_download_url':base+'SHA256SUMS'}]}
+        data=b'MZ'+b'installer-fixture';digest=hashlib.sha256(data).hexdigest();name='Mezba-Download-Manager-0.1.4-Windows-x64-Setup.exe'
+        base='https://github.com/me/mdm/releases/download/v0.1.4/'
+        release={'tag_name':'v0.1.4','assets':[{'name':name,'size':len(data),'digest':'sha256:'+digest,'browser_download_url':base+name},{'name':'SHA256SUMS','browser_download_url':base+'SHA256SUMS'}]}
         with tempfile.TemporaryDirectory() as tmp,patch.object(updater,'STATE',Path(tmp)),patch.object(updater,'init_state'):
             def metadata(url,limit):return json.dumps(release).encode() if url.endswith('/latest') else (digest+'  '+name+'\n').encode()
             with patch.object(updater,'read',side_effect=metadata),patch.object(updater,'open_url',return_value=io.BytesIO(data)):
                 result=updater.check_and_download('me/mdm',lambda *_:None)
                 self.assertEqual(Path(result['installer']).read_bytes(),data)
-            release['assets'][0]['browser_download_url']='https://github.com/other/mdm/releases/download/v0.1.3/'+name
+            release['assets'][0]['browser_download_url']='https://github.com/other/mdm/releases/download/v0.1.4/'+name
             with patch.object(updater,'read',side_effect=metadata),self.assertRaisesRegex(ValueError,'different repository'):
                 updater.check_and_download('me/mdm',lambda *_:None)
     def test_legacy_release_number_does_not_reinstall_old_build(self):
