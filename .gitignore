@@ -9,3 +9,4 @@ __pycache__/
 *.sqlite*
 *.mdm-part
 *.mdm-state
+*.o
