@@ -11,6 +11,7 @@ import subprocess
 import sys
 import threading
 import time
+import traceback
 import urllib.parse
 import uuid
 from .common import BASE, STATE, SOCKET, DEFAULTS, BROWSERS, atomic_json, init_state, safe_name, url_checked
@@ -19,6 +20,34 @@ from . import media, __version__
 from .common import update_in_progress
 
 MAX_MESSAGE = 256 * 1024
+LIMITS = {'concurrent': (1, 4), 'connections': (1, 8), 'speed_kib': (0, 1000000), 'retries': (0, 30)}
+
+
+def load_settings(path):
+    """Read settings.json without ever letting a damaged file stop the service from starting."""
+    settings = dict(DEFAULTS)
+    try:
+        data = json.loads(Path(path).read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return settings
+    if not isinstance(data, dict):
+        return settings
+    for key, default in DEFAULTS.items():
+        if key not in data:
+            continue
+        value = data[key]
+        if key in LIMITS:
+            try:
+                low, high = LIMITS[key]
+                value = max(low, min(high, int(value)))
+            except (TypeError, ValueError):
+                continue
+        elif not isinstance(value, str):
+            continue
+        elif key == 'cookies_browser' and value not in BROWSERS:
+            value = ''
+        settings[key] = value
+    return settings
 
 def request(message, autostart=True, timeout=125):
     init_state()
@@ -60,10 +89,15 @@ class Manager:
         self.db.execute('PRAGMA journal_mode=WAL')
         self.db.execute('PRAGMA synchronous=FULL')
         self.db.execute('CREATE TABLE IF NOT EXISTS tasks (id TEXT PRIMARY KEY, data TEXT NOT NULL)')
-        self.tasks = {i: json.loads(data) for i, data in self.db.execute('SELECT id,data FROM tasks')}
-        self.settings = dict(DEFAULTS)
-        if (STATE / 'settings.json').exists():
-            self.settings.update(json.loads((STATE / 'settings.json').read_text()))
+        self.tasks = {}
+        for task_id, data in self.db.execute('SELECT id,data FROM tasks').fetchall():
+            try:
+                task = json.loads(data)
+                task['status'], task['title'], task['folder']  # required fields
+                self.tasks[task_id] = task
+            except (ValueError, KeyError, TypeError):
+                print('Skipping unreadable history entry', task_id, file=sys.stderr)
+        self.settings = load_settings(STATE / 'settings.json')
         for task in self.tasks.values():
             if task['status'] in ('downloading', 'pausing', 'verifying'):
                 task.update(status='paused', error='Recovered after interruption. Press Resume to continue.')
@@ -102,7 +136,10 @@ class Manager:
             filename = 'Google-Drive-file'
         task_id = uuid.uuid4().hex[:12]
         folder = Path(self.settings['folder']).expanduser().resolve() / (safe_name(title or filename)[:60] + '-' + task_id)
-        delay = max(0, min(int(data.get('delay_minutes', 0)), 525600))
+        try:
+            delay = max(0, min(int(data.get('delay_minutes', 0) or 0), 525600))
+        except (TypeError, ValueError):
+            raise ValueError('The start delay must be a whole number of minutes.')
         task = {'id': task_id, 'url': url, 'kind': kind, 'quality': quality,
                 'title': title or filename, 'filename': filename, 'folder': str(folder),
                 'status': 'queued', 'done': 0, 'total': None, 'speed': 0, 'error': '',
@@ -161,7 +198,10 @@ class Manager:
                     updated['folder'] = str(folder.resolve())
                 for key, low, high in [('concurrent', 1, 4), ('connections', 1, 8), ('speed_kib', 0, 1000000), ('retries', 0, 30)]:
                     if key in data:
-                        n = int(data[key])
+                        try:
+                            n = int(data[key])
+                        except (TypeError, ValueError):
+                            raise ValueError(f'{key} must be a whole number between {low} and {high}')
                         if not low <= n <= high:
                             raise ValueError(f'{key} must be between {low} and {high}')
                         updated[key] = n
@@ -292,18 +332,25 @@ class Manager:
 
     def schedule(self):
         while not self.closing.wait(0.3):
-            with self.lock:
-                if self.updating or update_in_progress():
-                    continue
-                for task in sorted(self.tasks.values(), key=lambda t: t['created']):
-                    if len(self.active) >= self.settings['concurrent']:
-                        break
-                    if task['status'] == 'queued' and task['start_at'] <= time.time():
-                        stop = threading.Event()
-                        self.active[task['id']] = stop
-                        task.update(status='downloading', error='', speed=0)
-                        self.save(task)
-                        threading.Thread(target=self.run, args=(task, stop, self.settings.copy()), daemon=True).start()
+            try:
+                self.schedule_once()
+            except Exception:
+                # One bad task or a transient database error must never stop every future download.
+                traceback.print_exc()
+
+    def schedule_once(self):
+        with self.lock:
+            if self.updating or update_in_progress():
+                return
+            for task in sorted(self.tasks.values(), key=lambda t: t['created']):
+                if len(self.active) >= self.settings['concurrent']:
+                    break
+                if task['status'] == 'queued' and task['start_at'] <= time.time():
+                    stop = threading.Event()
+                    self.active[task['id']] = stop
+                    task.update(status='downloading', error='', speed=0)
+                    self.save(task)
+                    threading.Thread(target=self.run, args=(task, stop, self.settings.copy()), daemon=True).start()
 
     def run(self, task, stop, settings):
         last_saved = 0
