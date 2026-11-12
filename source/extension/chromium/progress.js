@@ -2,6 +2,7 @@
 const $=id=>document.getElementById(id),id=new URLSearchParams(location.search).get('id');
 let port=null,sequence=0,pending=new Map(),timer=null,current=null,closed=false;
 function human(n){n=Number(n)||0;for(const u of ['B','KiB','MiB','GiB','TiB']){if(n<1024||u==='TiB')return n.toFixed(1)+' '+u;n/=1024;}}
+function clock(s){s=Math.max(0,Math.ceil(Number(s)||0));const h=Math.floor(s/3600),m=Math.floor(s%3600/60),r=s%60;return h?h+'h '+String(m).padStart(2,'0')+'m':m?m+'m '+String(r).padStart(2,'0')+'s':r+'s';}
 function connect(){
  if(closed)return;
  if(port)port.disconnect();
@@ -44,7 +45,8 @@ function render(task){
  else if(['queued','downloading','pausing'].includes(task.status))$('bar').removeAttribute('value');
  else $('bar').value=0;
  let detail=human(done)+(total?' / '+human(total):'')+(speed?' · '+human(speed)+'/s':'');
- if(speed&&total>done)detail+=' · '+Math.ceil((total-done)/speed)+'s left';
+ if(total)detail+=' · '+Math.min(100,Math.floor(done*100/total))+'%';
+ if(speed&&total>done)detail+=' · '+clock((total-done)/speed)+' left';
  if(task.quality?.startsWith('playlist:'))detail='Playlist item '+(task.playlist_index||'?')+'/'+(task.playlist_count||'?')+' · '+detail;
  if(task.status==='complete'&&task.quality?.startsWith('playlist:'))detail='Playlist saved. Open the folder to see all downloaded items.';
  $('details').textContent=detail;
@@ -61,5 +63,6 @@ $('pause').onclick=async()=>{if(!current)return;$('pause').disabled=true;try{ren
 $('folder').onclick=()=>send('folder').catch(e=>{$('error').textContent=e.message;});
 $('app').onclick=()=>send('open').catch(e=>{$('error').textContent=e.message;});
 $('reconnect').onclick=connect;
-addEventListener('unload',()=>{closed=true;clearTimeout(timer);if(port)port.disconnect();});
+const shutdown=()=>{closed=true;clearTimeout(timer);if(port)port.disconnect();};
+addEventListener('unload',shutdown);addEventListener('pagehide',shutdown);
 if(/^[0-9a-f]{12}$/.test(id||''))connect();else{$('state').textContent='Invalid download';$('error').textContent='Open progress from a valid MDM download.';}
