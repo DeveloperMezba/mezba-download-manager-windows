@@ -30,7 +30,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pyinstaller
           if (Test-Path "build/python-packages-lock.json") {
-              pip install -r build/python-packages-lock.json
+              python -c 'import json, subprocess; pkgs = json.load(open("build/python-packages-lock.json")); reqs = [p["project"] + "==" + p["version"] for p in pkgs]; subprocess.check_call(["pip", "install"] + reqs)'
           }
 
       - name: Run Build Script
