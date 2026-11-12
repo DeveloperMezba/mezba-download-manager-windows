@@ -4,12 +4,12 @@
   const css = `
 .mdm-picker{position:relative;min-width:0;margin:10px 0}
 .mdm-picker-toggle{display:flex!important;justify-content:space-between;align-items:center;gap:8px;width:100%;text-align:left;white-space:normal;overflow-wrap:anywhere}
-.mdm-picker-list{background:#142031;border:1px solid #3c526d;border-radius:9px;margin-top:5px;max-height:var(--mdm-list-height,240px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#70e0c2 #142031;padding:5px}
+.mdm-picker-list{background:#151c2a;border:1px solid #2f3f5c;border-radius:10px;margin-top:5px;max-height:var(--mdm-list-height,240px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#5eead4 #151c2a;padding:5px}
 .mdm-picker-list[hidden]{display:none!important}
-.mdm-picker-group{font:700 11px/1.4 system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase;color:#8ea6c3;padding:11px 8px 6px}
-.mdm-picker-option{display:block;width:100%;text-align:left;white-space:normal;overflow-wrap:anywhere;font:13px/1.4 system-ui,sans-serif!important;border:0!important;border-radius:6px!important;background:transparent!important;color:#eaf0fb!important;padding:10px 8px!important;margin:0!important}
-.mdm-picker-option:hover,.mdm-picker-option:focus{background:#2b4056!important;outline:2px solid #70e0c2;outline-offset:-2px}
-.mdm-picker-option[aria-selected=true]{background:#24453f!important;color:#95f3d8!important}
+.mdm-picker-group{font:700 11px/1.4 system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase;color:#93a3bd;padding:11px 8px 6px}
+.mdm-picker-option{display:block;width:100%;text-align:left;white-space:normal;overflow-wrap:anywhere;font:13px/1.4 system-ui,sans-serif!important;border:0!important;border-radius:6px!important;background:transparent!important;color:#e9eff9!important;padding:10px 10px!important;margin:0!important}
+.mdm-picker-option:hover,.mdm-picker-option:focus{background:#232f47!important;outline:2px solid #5eead4;outline-offset:-2px}
+.mdm-picker-option[aria-selected=true]{background:#10332f!important;color:#8ff3e2!important}
 `;
   let nextId = 0;
   class Picker {
