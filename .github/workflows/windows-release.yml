@@ -1,0 +1,80 @@
+name: Build MDM Windows
+on:
+  workflow_dispatch:
+  push:
+    tags: ['v*.*.*']
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Install build and test tools
+        shell: pwsh
+        run: |
+          choco install mingw nsis ffmpeg -y --no-progress
+          $env:Path = [Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [Environment]::GetEnvironmentVariable('Path','User')
+          $env:Path | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          python -m pip install 'yt-dlp[default]' gdown
+          npm install --no-save jsdom@26
+          $env:NODE_PATH = Join-Path $env:GITHUB_WORKSPACE 'node_modules'
+          "NODE_PATH=$env:NODE_PATH" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+      - name: Verify source and version
+        shell: pwsh
+        run: |
+          python -m compileall -q source build
+          if ($LASTEXITCODE -ne 0) { throw 'Source compilation failed' }
+          python -m unittest discover -s source/tests -p 'test_*.py' -v
+          if ($LASTEXITCODE -ne 0) { throw 'Regression tests failed' }
+          node source/tests/test_extension.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Extension tests failed' }
+          node source/tests/test_progress.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Progress tests failed' }
+          node source/tests/test_menu.cjs
+          if ($LASTEXITCODE -ne 0) { throw 'Menu tests failed' }
+          if ($env:GITHUB_REF_TYPE -eq 'tag') {
+            $version = (Get-Content VERSION).Trim()
+            if ($env:GITHUB_REF_NAME -ne "v$version") { throw 'Tag/version mismatch' }
+          }
+      - name: Assemble Windows runtime and installer
+        shell: pwsh
+        run: |
+          @{repository=$env:GITHUB_REPOSITORY} | ConvertTo-Json | Set-Content source/update-source.json
+          New-Item -ItemType Directory -Force build-cache | Out-Null
+          $items = Get-Content build/python-runtime-lock.json | ConvertFrom-Json
+          foreach ($item in $items) {
+            $path = Join-Path (Resolve-Path build-cache) $item.name
+            Invoke-WebRequest $item.url -OutFile $path
+            if ((Get-FileHash $path -Algorithm SHA256).Hash.ToLower() -ne $item.sha256) { throw 'Runtime checksum mismatch' }
+          }
+          $tcl = Join-Path (Resolve-Path build-cache) 'tcltk'
+          New-Item -ItemType Directory -Force $tcl | Out-Null
+          $msi = Join-Path (Resolve-Path build-cache) 'tcltk.msi'
+          $p = Start-Process msiexec.exe -ArgumentList "/a `"$msi`" /qn TARGETDIR=`"$tcl`"" -Wait -PassThru
+          if ($p.ExitCode -ne 0) { throw 'MSI extraction failed' }
+          python build/build.py --cc gcc --windres windres --makensis "${env:ProgramFiles(x86)}\NSIS\makensis.exe" --tcltk-extracted $tcl
+          if ($LASTEXITCODE -ne 0) { throw 'Installer build failed' }
+          & dist/payload/runtime/python.exe dist/payload/app/mdm.py --doctor
+          if ($LASTEXITCODE -ne 0) { throw 'Bundled runtime failed' }
+          & dist/payload/runtime/python.exe -c "import tkinter; r=tkinter.Tk(); r.withdraw(); r.update(); r.destroy(); import yt_dlp,gdown"
+          if ($LASTEXITCODE -ne 0) { throw 'Tk smoke test failed' }
+          & dist/payload/runtime/python.exe -c "import os,sys; from mdm.child import windows; sys.exit(windows(os.getpid(), [sys.executable, '-c', 'print(123)']))"
+          if ($LASTEXITCODE -ne 0) { throw 'Bundled Windows worker failed' }
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MDM-Windows-installer
+          path: |
+            dist/*Setup.exe
+            dist/SHA256SUMS
+      - name: Publish stable release
+        if: startsWith(github.ref, 'refs/tags/')
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          $exe = (Get-ChildItem dist/*Setup.exe).FullName
+          gh release create $env:GITHUB_REF_NAME $exe dist/SHA256SUMS --verify-tag --title "MDM Windows $env:GITHUB_REF_NAME" --notes-file CHANGELOG.md --latest
