@@ -1,15 +1,16 @@
 {
   "manifest_version": 3,
   "name": "Mezba Download Manager",
-  "version": "0.1.2",
-  "description": "Video quality and audio selection, file downloads, and a lightweight Linux download queue.",
+  "version": "0.1.3",
+  "description": "Video quality and audio selection, file downloads and a lightweight Windows download queue.",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtczzO0ZI/AaI7FJeB6jUrJsGz8gf1MXWEmdpcM3lyNmIDOsDXDxxXihTT1SpK/1Yli71xLySLQDtWXy9Sw8YQLjdlbb/jcecKmqctPpjGtA9ly90BoV6UBYs3BYzXi3EhQdOjNnusTrpDhSZHJHbfAKMgRuM7ZxqiKBDsvDPHeA0h1WPKx7q6DQTu1dgeXAjGjjnnsfzvgNcf15YpoeEjlk8DysogrSLXG6xIIkMpF/xFj5l//HFiZsUwWg7g7+B4KIh/VdaEV83tlfELiaR4im/Z1XcwO2g97z8JKJzPxQuMMFhCh+hYZ7GvLDD45bq4vfCRT8fP+A5EElRmKRyQQIDAQAB",
   "permissions": [
     "nativeMessaging",
     "activeTab",
     "contextMenus",
     "tabs",
-    "webRequest"
+    "webRequest",
+    "storage"
   ],
   "host_permissions": [
     "http://*/*",
